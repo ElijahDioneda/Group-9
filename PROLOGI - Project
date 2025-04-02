@@ -70,8 +70,8 @@ def mode_selection():
     text3 = font.render("Press 2 for Pro Mode (First to 2 rounds wins)", True, WHITE)
 
     win.blit(text1, (WIDTH//2 - text1.get_width()//2, HEIGHT//3))
-    win.blit(text2, (WIDTH//2 - text2.get_width()//2, HEIGHT//2-20))
-    win.blit(text3, (WIDTH//2 - text3.get_width()//2, HEIGHT//2+20))
+    win.blit(text2, (WIDTH//2 - text2.get_width()//2, HEIGHT//2 - 20))
+    win.blit(text3, (WIDTH//2 - text3.get_width()//2, HEIGHT//2 + 20))
 
     pygame.display.update()
 
