@@ -35,129 +35,130 @@ start_time = None
 selected_mode = None
 
 def randomize_ball_direction():
-"""Gives the ball a random angle while keeping speed constant."""
-  angle - random.uniform(-0.5, 0.5)
-  return speed, speed * angle
+    angle = random.uniform(-0.5, 0.5)
+    return speed, speed * angle
 
 def show_title_screen():
-  win.fill(BLACK)
-  title = font.render("Pong||Masters", True, WHITE)
-  prompt = font.render("Press SPACE to continue", True, WHITE)
-  win.blit(title, (WIDTH//2 - title.get_width()//2, HEIGHT//3))
-  win.blit(prompt, (WIDTH//2 - prompt.get_width()//2, HEIGHT//2))
-  pygame.display.update()
+    win.fill(BLACK)
+    title = font.render("Pong||Masters", True, WHITE)
+    prompt = font.render("Press SPACE to continue", True, WHITE)
+    win.blit(title, (WIDTH//2 - title.get_width()//2, HEIGHT//3))
+    win.blit(prompt, (WIDTH//2 - prompt.get_width()//2, HEIGHT//2))
+    pygame.display.update()
 
 def show_tutorial():
-  win.fill(BLACK)
-  tutorial = [
-      "How to Play:",
-      "Player 1 (Left): W/S to move",
-      "Player 2 (Right): UP/DOWN to move",
-      "Score by hitting the ball past your opponent",
-      "Select a game mode before playing!",
-      "Ball resets with a random trajectory!",
-      "Press SPACE to choose a mode"
-]
+    win.fill(BLACK)
+    tutorial = [
+        "How to Play:",
+        "Player 1 (Left): W/S to move",
+        "Player 2 (Right): UP/DOWN to move",
+        "Score by hitting the ball past your opponent",
+        "Select a game mode before playing!",
+        "Ball resets with a random trajectory!",
+        "Press SPACE to choose a mode"
+    ]
 
-  for i, line in enumerate(tutorial):
-    text = font.render(line, True, WHITE)
-    win.blit(text, (WIDTH//2 - text.get_width()//2, HEIGHT//3 + i * 40))
+    for i, line in enumerate(tutorial):
+        text = font.render(line, True, WHITE)
+        win.blit(text, (WIDTH//2 - text.get_width()//2, HEIGHT//3 + i * 40))
 
-  pygame.display.update()
+    pygame.display.update()
 
 def mode_selection():
-  win.fill(BLACK)
-  text1 = font.render("Select a Mode:", True, WHITE)
-  text2 = font.render("Press 1 for Classic Mode (First to 11 wins)", True, WHITE)
-  text3 = font.render("Press 2 for Pro Mode (First to 2 rounds wins)", True, WHITE)
+    win.fill(BLACK)
+    text1 = font.render("Select a Mode:", True, WHITE)
+    text2 = font.render("Press 1 for Classic Mode (First to 11 wins)", True, WHITE)
+    text3 = font.render("Press 2 for Pro Mode (First to 2 rounds wins)", True, WHITE)
 
-  win.blit(text1, (WIDTH//2 - text1.get_width()//2, HEIGHT//3))
-  win.blit(text2, (WIDTH//2 - text2.get_width()//2, HEIGHT//2-20))
-  win.blit(text3, (WIDTH//2 - text3.get_width()//2, HEIGHT//2+20))
+    win.blit(text1, (WIDTH//2 - text1.get_width()//2, HEIGHT//3))
+    win.blit(text2, (WIDTH//2 - text2.get_width()//2, HEIGHT//2-20))
+    win.blit(text3, (WIDTH//2 - text3.get_width()//2, HEIGHT//2+20))
 
-pygame.display.update()
+    pygame.display.update()
 
 running = True
 while running:
-  while menu_on:
-    show_title_screen()
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        running = False
-        menu_on = False
-      if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-        menu_on = False
-        tutorial_on = True
-  while tutorial_on:
-    show_tutorial()
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        running = False
-        tutorial_on = False
-      if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-        tutorial_on = False
-        mode_selection_on = True
+    while menu_on:
+        show_title_screen()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                menu_on = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                menu_on = False
+                tutorial_on = True
 
-  while mode_selection_on:
-    show_mode_selection()
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        running = False
-        mede_selection_on = False
-      if event.type == pygame.K_1:
-        selected_mode = "classic"
-        mode_selection_on = False
-        game_on = True
-  while game_on:
-    pygame.time.delay(20)
+    while tutorial_on:
+        show_tutorial()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                tutorial_on = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                tutorial_on = False
+                mode_selection_on = True
 
-    for event in pygame.event.get()
-      if event.type == pygame.QUIT:
-        running = False
-        game_on = False
+    while mode_selection_on:
+        show_mode_selection()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                mede_selection_on = False
+            if event.type == pygame.K_1:
+                selected_mode = "classic"
+                mode_selection_on = False
+                game_on = True
 
-  keys = pygame.key.get_pressed()
+    while game_on:
+        pygame.time.delay(20)
+
+        for event in pygame.event.get()
+            if event.type == pygame.QUIT:
+                running = False
+                game_on = False
+
+        keys = pygame.key.get_pressed()
       
-      if keys[pygame.K_w] and player1.top > 0:
-        player1.y -= speed
-      if keys[pygame.K_s] and player1 bottom < HEIGHT:
-        player1.y += speed
-      if keys[pygame.K_UP] and player2.top > 0:
-        player2.y -= speed
-      if keys[pygame.K_DOWN] and player2.top < HEIGHT:
-        player2.y += speed
+        if keys[pygame.K_w] and player1.top > 0:
+            player1.y -= speed
+        if keys[pygame.K_s] and player1 bottom < HEIGHT:
+            player1.y += speed
+        if keys[pygame.K_UP] and player2.top > 0:
+            player2.y -= speed
+        if keys[pygame.K_DOWN] and player2.top < HEIGHT:
+            player2.y += speed
 
-      ball.x += ball_speed_x
-      ball.y += ball_speed_y
+        ball.x += ball_speed_x
+        ball.y += ball_speed_y
 
-      if ball.top <= 0 or ball.bottom >= HEIGHT:
-        ball_speed_y*= -1
+        if ball.top <= 0 or ball.bottom >= HEIGHT:
+            ball_speed_y*= -1
 
-      if ball.colliderect(player1) or ball.colliderect(player2):
-        ball_speed_x*= -1
+        if ball.colliderect(player1) or ball.colliderect(player2):
+            ball_speed_x*= -1
 
-      if ball.left <= 0:
-        player2_score += 1
-        ball.x, ball.y = WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2
-        ball_speed_x, ball_speed_y = randomize_ball_direction()
-      if ball.right += WIDTH:
-        player1_score += 1
-        ball.x, ball.y = WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2
-        ball_speed_x, ball_speed_y = [-val for val in randomize_ball_direction()]
+        if ball.left <= 0:
+            player2_score += 1
+            ball.x, ball.y = WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2
+            ball_speed_x, ball_speed_y = randomize_ball_direction()
+        if ball.right += WIDTH:
+            player1_score += 1
+            ball.x, ball.y = WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2
+            ball_speed_x, ball_speed_y = [-val for val in randomize_ball_direction()]
 
-      if player1_score == score_limit or player2_score == score_limit:
-        game_on = False
-        menu_on = True
+        if player1_score == score_limit or player2_score == score_limit:
+            game_on = False
+            menu_on = True
 
-      win.fill(BLACK)
-      pygame.draw.rect(win, WHITE, player1)
-      pygame.draw.rect(win, WHITE, player2)
-      pygame.draw.ellipse(win, WHITE, ball)
-      pygame.draw.aaline(win, WHITE, (WIDTH//2, 0), (WIDTH//2, HEIGHT))
+        win.fill(BLACK)
+        pygame.draw.rect(win, WHITE, player1)
+        pygame.draw.rect(win, WHITE, player2)
+        pygame.draw.ellipse(win, WHITE, ball)
+        pygame.draw.aaline(win, WHITE, (WIDTH//2, 0), (WIDTH//2, HEIGHT))
 
-      score_display = font.render(f"Score: {player1_score} - {player2_score}", True WHITE)
-      win.blit(score_display, (WIDTH//2 - score_display.get_width()//2, 20))
+        score_display = font.render(f"Score: {player1_score} - {player2_score}", True WHITE)
+        win.blit(score_display, (WIDTH//2 - score_display.get_width()//2, 20))
 
-      pygame.display.update()
+        pygame.display.update()
 
 pygame.quit()
