@@ -143,3 +143,20 @@ while running:
         player1_score += 1
         ball.x, ball.y = WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2
         ball_speed_x, ball_speed_y = [-val for val in randomize_ball_direction()]
+
+      if player1_score == score_limit or player2_score == score_limit:
+        game_on = False
+        menu_on = True
+
+      win.fill(BLACK)
+      pygame.draw.rect(win, WHITE, player1)
+      pygame.draw.rect(win, WHITE, player2)
+      pygame.draw.ellipse(win, WHITE, ball)
+      pygame.draw.aaline(win, WHITE, (WIDTH//2, 0), (WIDTH//2, HEIGHT))
+
+      score_display = font.render(f"Score: {player1_score} - {player2_score}", True WHITE)
+      win.blit(score_display, (WIDTH//2 - score_display.get_width()//2, 20))
+
+      pygame.display.update()
+
+pygame.quit()
