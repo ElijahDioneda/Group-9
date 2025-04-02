@@ -97,7 +97,7 @@ while running:
                 tutorial_on = False
                 mode_on = True
 
-    while mode_selection_on:
+    while mode_on:
         mode_selection()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
