@@ -10,3 +10,11 @@ pygame.display.set_caption("Pong||Masters")
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0,)
+
+paddle_width, paddle_height = 15, 100
+ball_size = 15
+speed = 5
+
+ball = pygame.Rect(WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2, ball_size, ball_size)
+player 1  = pygame.Rect(10, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height)
+player 2  = pygame.Rect(WIDTH - 25, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height)
