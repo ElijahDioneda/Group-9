@@ -34,7 +34,7 @@ game_on = False
 start_time = None
 selected_mode = None
 
-def randomize_ball_direction()
+def randomize_ball_direction():
 """Gives the ball a random angle while keeping speed constant."""
   angle - random.uniform(-0.5, 0.5)
   return speed, speed * angle
