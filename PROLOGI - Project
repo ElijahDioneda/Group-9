@@ -178,8 +178,8 @@ while running:
                     game_on = False
                     menu_on = True
             else:
-                game_active = False
-                menu_active = True
+                game_on = False
+                menu_on = True
 
         win.fill(BLACK)
         pygame.draw.rect(win, WHITE, player1)
