@@ -31,6 +31,7 @@ menu_on = True
 tutorial_on = False
 mode_on = False
 game_on = False
+start_time = None
 selected_mode = None
 
 def randomize_ball_direction():
@@ -74,6 +75,18 @@ def mode_selection():
     win.blit(text3, (WIDTH//2 - text3.get_width()//2, HEIGHT//2 + 20))
 
     pygame.display.update()
+
+def show_final_winner():
+    win.fill(BLACK)
+    if rounds_won_p1 == rounds_limit:
+        winner_text = "Player 1 Wins the Best of Three!"
+    else:
+        winner_text = "Player 2 Wins the Best of Three!"
+    
+    winner = font.render(winner_text, True, WHITE)
+    win.blit(winner, (WIDTH//2 - winner.get_width()//2, HEIGHT//2))
+    pygame.display.update()
+    pygame.time.delay(3000)
 
 running = True
 while running:
@@ -151,8 +164,22 @@ while running:
             ball_speed_x, ball_speed_y = [-val for val in randomize_ball_direction()]
 
         if player1_score == score_limit or player2_score == score_limit:
-            game_on = False
-            menu_on = True
+            if selected_mode == "best_of_three":
+                if player1_score == score_limit:
+                    rounds_won_p1 += 1
+                elif player2_score == score_limit:
+                    rounds_won_p2 += 1
+
+                player1_score, player2_score = 0, 0
+
+                if rounds_won_p1 == rounds_limit or rounds_won_p2 == rounds_limit:
+                    show_final_winner()
+                    rounds_won_p1, rounds_won_p2 = 0, 0
+                    game_on = False
+                    menu_on = True
+            else:
+                game_active = False
+                menu_active = True
 
         win.fill(BLACK)
         pygame.draw.rect(win, WHITE, player1)
@@ -161,7 +188,10 @@ while running:
         pygame.draw.aaline(win, WHITE, (WIDTH//2, 0), (WIDTH//2, HEIGHT))
 
         score_display = font.render(f"Score: {player1_score} - {player2_score}", True, WHITE)
+        rounds_display = font.render(f"Rounds Won: {rounds_won_p1} - {rounds_won_p2}", True, WHITE)
+
         win.blit(score_display, (WIDTH//2 - score_display.get_width()//2, 20))
+        win.blit(rounds_display, (WIDTH//2 - rounds_display.get_width()//2, 50))
 
         pygame.display.update()
 
