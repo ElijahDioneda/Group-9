@@ -99,7 +99,7 @@ while running:
                 mode_selection_on = True
 
     while mode_selection_on:
-        show_mode_selection()
+        mode_selection()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
