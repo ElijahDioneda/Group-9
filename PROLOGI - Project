@@ -9,15 +9,15 @@ win = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pong||Masters")
 
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0,)
+BLACK = (0, 0, 0)
 
 paddle_width, paddle_height = 15, 100
 ball_size = 15
 speed = 5
 
 ball = pygame.Rect(WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2, ball_size, ball_size)
-player1  = pygame.Rect(10, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height)
-player2  = pygame.Rect(WIDTH - 25, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height)
+player1 = pygame.Rect(10, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height)
+player2 = pygame.Rect(WIDTH - 25, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height)
 
 ball_speed_x, ball_speed_y = speed, speed
 
@@ -31,7 +31,6 @@ menu_on = True
 tutorial_on = False
 mode_on = False
 game_on = False
-start_time = None
 selected_mode = None
 
 def randomize_ball_direction():
@@ -96,18 +95,23 @@ while running:
                 tutorial_on = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 tutorial_on = False
-                mode_selection_on = True
+                mode_on = True
 
     while mode_selection_on:
         mode_selection()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                mede_selection_on = False
-            if event.type == pygame.K_1:
-                selected_mode = "classic"
-                mode_selection_on = False
-                game_on = True
+                mode_on = False
+            if event.key == pygame.K_1:
+                if event.key == pygame.K_1:
+                    selected_mode = "classic"
+                    mode_on = False
+                    game_on = True
+                elif event.key == pygame.K_2:
+                    selected_mode = "pro"
+                    mode_on = False
+                    game_on = True
 
     while game_on:
         pygame.time.delay(20)
