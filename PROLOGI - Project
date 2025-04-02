@@ -112,7 +112,7 @@ while running:
     while game_on:
         pygame.time.delay(20)
 
-        for event in pygame.event.get()
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
                 game_on = False
@@ -121,7 +121,7 @@ while running:
       
         if keys[pygame.K_w] and player1.top > 0:
             player1.y -= speed
-        if keys[pygame.K_s] and player1 bottom < HEIGHT:
+        if keys[pygame.K_s] and player1.bottom < HEIGHT:
             player1.y += speed
         if keys[pygame.K_UP] and player2.top > 0:
             player2.y -= speed
@@ -141,7 +141,7 @@ while running:
             player2_score += 1
             ball.x, ball.y = WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2
             ball_speed_x, ball_speed_y = randomize_ball_direction()
-        if ball.right += WIDTH:
+        if ball.right >= WIDTH:
             player1_score += 1
             ball.x, ball.y = WIDTH//2 - ball_size//2, HEIGHT//2 - ball_size//2
             ball_speed_x, ball_speed_y = [-val for val in randomize_ball_direction()]
@@ -156,7 +156,7 @@ while running:
         pygame.draw.ellipse(win, WHITE, ball)
         pygame.draw.aaline(win, WHITE, (WIDTH//2, 0), (WIDTH//2, HEIGHT))
 
-        score_display = font.render(f"Score: {player1_score} - {player2_score}", True WHITE)
+        score_display = font.render(f"Score: {player1_score} - {player2_score}", True, WHITE)
         win.blit(score_display, (WIDTH//2 - score_display.get_width()//2, 20))
 
         pygame.display.update()
